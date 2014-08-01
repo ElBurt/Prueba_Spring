@@ -18,4 +18,7 @@
   <build>
     <finalName>springapp</finalName>
   </build>
+  <properties>
+  	<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
+  </properties>
 </project>
