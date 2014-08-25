@@ -1,12 +1,16 @@
 package com.companyname.springapp.web;
 
-import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.companyname.springapp.domain.Product;
+import com.companyname.springapp.repository.InMemoryProductDao;
 import com.companyname.springapp.service.SimpleProductManager;
 
 public class InventoryControllerTests {
@@ -14,7 +18,10 @@ public class InventoryControllerTests {
     @Test
     public void testHandleRequestView() throws Exception{		
         InventoryController controller = new InventoryController();
-        controller.setProductManager(new SimpleProductManager());
+        SimpleProductManager spm = new SimpleProductManager();
+        spm.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
+        controller.setProductManager(spm);
+        //controller.setProductManager(new SimpleProductManager());
         ModelAndView modelAndView = controller.handleRequest(null, null);		
         assertEquals("hello", modelAndView.getViewName());
         assertNotNull(modelAndView.getModel());

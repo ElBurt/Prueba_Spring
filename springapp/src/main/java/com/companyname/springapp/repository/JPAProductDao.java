@@ -26,7 +26,7 @@ public class JPAProductDao implements ProductDao {
     @Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
     public List<Product> getProductList() {
-        return em.createQuery("select * from Product p order by p.id").getResultList();
+        return em.createQuery("select p from Product p order by p.id").getResultList();
     }
 
     @Transactional(readOnly = false)
