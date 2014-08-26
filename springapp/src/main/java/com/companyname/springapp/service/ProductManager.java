@@ -10,5 +10,7 @@ public interface ProductManager extends Serializable {
     public void increasePrice(int percentage);
     
     public List<Product> getProducts();
+    
+    public void createProduct(CreateProduct data);
 
 }

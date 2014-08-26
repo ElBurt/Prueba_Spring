@@ -11,6 +11,7 @@
     </c:forEach>
     <br>
     <a href="<c:url value="priceincrease.htm"/>">Increase Prices</a>
+    <a href="<c:url value="createproduct.htm"/>">Create Product</a>
     <br>
   </body>
 </html>

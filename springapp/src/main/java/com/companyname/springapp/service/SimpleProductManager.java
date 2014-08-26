@@ -35,4 +35,12 @@ public class SimpleProductManager implements ProductManager {
             }
         }
     }
+
+	public void createProduct(CreateProduct data) {
+		Product product = new Product();
+		product.setDescription(data.getDescription());
+		product.setPrice(data.getPrice());
+		productDao.saveProduct(product);
+		
+	}
 }
