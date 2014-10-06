@@ -19,4 +19,9 @@ public class InMemoryProductDao implements ProductDao {
     public void saveProduct(Product prod) {
     }
 
+	public Product getProductByProductId(Integer productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

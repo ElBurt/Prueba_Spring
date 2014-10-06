@@ -12,5 +12,7 @@ public interface ProductManager extends Serializable {
     public List<Product> getProducts();
     
     public void createProduct(CreateProduct data);
+    
+    public Product getProductByProductId(Integer productId);
 
 }

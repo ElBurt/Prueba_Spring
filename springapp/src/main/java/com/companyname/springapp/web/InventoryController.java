@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.companyname.springapp.service.InventoryManager;
 import com.companyname.springapp.service.ProductManager;
 
 @Controller
@@ -25,6 +26,9 @@ public class InventoryController {
 
     @Autowired
     private ProductManager productManager;
+    
+    @Autowired
+    private InventoryManager inventoryManager;
 
     @RequestMapping(value="/hello.htm")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -36,6 +40,7 @@ public class InventoryController {
         Map<String, Object> myModel = new HashMap<String, Object>();
         myModel.put("now", now);
         myModel.put("products", this.productManager.getProducts());
+        myModel.put("inventories", this.inventoryManager.getInventories());
 
         return new ModelAndView("hello", "model", myModel);
     }
@@ -43,5 +48,9 @@ public class InventoryController {
 
     public void setProductManager(ProductManager productManager) {
         this.productManager = productManager;
+    }
+    
+    public void setInventoryManager(InventoryManager inventoryManager) {
+        this.inventoryManager = inventoryManager;
     }
 }

@@ -2,6 +2,7 @@ package com.companyname.springapp.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,8 +26,11 @@ public class CreateProductFormController {
     private ProductManager productManager;
 
     @RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(CreateProduct createProduct, BindingResult result)
+    public String onSubmit(@Valid CreateProduct createProduct, BindingResult result)
     {
+        if (result.hasErrors()) {
+            return "createproduct";
+        }
 		
         logger.info("Creating product " + createProduct.getDescription());
         productManager.createProduct(createProduct);

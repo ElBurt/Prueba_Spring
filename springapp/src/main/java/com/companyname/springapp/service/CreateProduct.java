@@ -1,8 +1,11 @@
 package com.companyname.springapp.service;
 
+import javax.validation.constraints.Min;
+
 public class CreateProduct {
 	
     private String description;
+	@Min(1)
     private Double price;
 
     public String getDescription() {

@@ -8,10 +8,10 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.companyname.springapp.domain.Product;
+import com.companyname.springapp.domain.Inventory;
 
-@Repository(value = "productDao")
-public class JPAProductDao implements ProductDao {
+@Repository(value = "inventoryDao")
+public class JPAInventoryDao implements InventoryDao {
 
     private EntityManager em = null;
 
@@ -23,20 +23,16 @@ public class JPAProductDao implements ProductDao {
         this.em = em;
     }
 
-    @Transactional(readOnly = true)
     @SuppressWarnings("unchecked")
-    public List<Product> getProductList() {
-        return em.createQuery("select p from Product p order by p.id").getResultList();
-    }
-    
-    @Transactional(readOnly = true)
-    public Product getProductByProductId(Integer productId){
-        return em.find(Product.class, productId);
-    }
+	@Transactional(readOnly = true)
+	public List<Inventory> getInventoryList() {
+    	return em.createQuery("select i from Inventory i order by i.idInventory").getResultList();
+	}
 
     @Transactional(readOnly = false)
-    public void saveProduct(Product prod) {
-        em.merge(prod);
-    }
+	public void saveInventory(Inventory inventory) {
+		em.merge(inventory);
+		
+	}
 
 }

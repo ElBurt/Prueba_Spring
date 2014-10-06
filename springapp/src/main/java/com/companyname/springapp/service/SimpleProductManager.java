@@ -43,4 +43,8 @@ public class SimpleProductManager implements ProductManager {
 		productDao.saveProduct(product);
 		
 	}
+	
+	 public Product getProductByProductId(Integer productId){
+	        return productDao.getProductByProductId(productId);
+	    }
 }
