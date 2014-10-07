@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.companyname.springapp.domain.Inventory;
-import com.companyname.springapp.domain.Product;
-import com.companyname.springapp.repository.InventoryDao;
-import com.companyname.springapp.repository.ProductDao;
+import com.companyname.springapp.repository.InventoryRepository;
+import com.companyname.springapp.repository.ProductRepository;
 
 @Component
 public class SimpleInventoryManager implements InventoryManager {
@@ -16,32 +15,35 @@ public class SimpleInventoryManager implements InventoryManager {
     private static final long serialVersionUID = 1L;
 
     @Autowired
-    private InventoryDao inventoryDao;
+    private InventoryRepository inventoryRepository;
+    
+    @Autowired
+    private ProductRepository productRepository;
 
-    public void setInventoryDao(InventoryDao inventoryDao) {
-        this.inventoryDao = inventoryDao;
+    public void setInventoryDao(InventoryRepository inventoryDao) {
+        this.inventoryRepository = inventoryDao;
     }
 
     public List<Inventory> getInventories() {
-        return inventoryDao.getInventoryList();
+    	System.out.println("HA ENTRADO INVENTORY..-..-.-.");
+    	System.out.println("TOTAL INVENTARIOS: " + inventoryRepository.count());
+    	System.out.println("Existe el 3: " + inventoryRepository.exists(3));
+    	System.out.println("findByIdInventory 10: " + inventoryRepository.findByIdInventory(10));
+    	System.out.println("findByProductRef 2: " + inventoryRepository.findByProductRef(productRepository.getProductByProductId(2)));
+    	System.out.println("Existe el 5 con desc: " + inventoryRepository.findByQuantity(4));
+    	
+        return inventoryRepository.getInventoryList();
     }
     
-    @Autowired
-    private ProductDao productDao;
-
-    public void setProductDao(ProductDao productDao) {
-        this.productDao = productDao;
-    }
-
-    public List<Product> getProducts() {
-        return productDao.getProductList();
+    public void setProductDao(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
     
 	public void createInventory(CreateInventory data) {
 		Inventory inventory = new Inventory();
-		inventory.setProductRef(productDao.getProductByProductId(data.getProductRef()));
+		inventory.setProductRef(productRepository.getProductByProductId(data.getProductRef()));
 		inventory.setQuantity(data.getQuantity());
-		inventoryDao.saveInventory(inventory);
+		inventoryRepository.saveInventory(inventory);
 		
 	}
 

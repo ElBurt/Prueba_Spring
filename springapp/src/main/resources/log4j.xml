@@ -15,6 +15,9 @@
 	<logger name="springapp">
 		<level value="info" />
 	</logger>
+	<logger name="com.companyname.springapp">
+		<level value="debug" />
+	</logger>
 
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.beans">

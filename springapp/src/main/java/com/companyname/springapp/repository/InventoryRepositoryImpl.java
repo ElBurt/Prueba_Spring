@@ -1,17 +1,16 @@
 package com.companyname.springapp.repository;
+/*TODO ARH ESTA ERA JPAINVENTORYDAO*/
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.companyname.springapp.domain.Inventory;
 
-@Repository(value = "inventoryDao")
-public class JPAInventoryDao implements InventoryDao {
+public class InventoryRepositoryImpl implements InventoryRepositoryCustom {
 
     private EntityManager em = null;
 
