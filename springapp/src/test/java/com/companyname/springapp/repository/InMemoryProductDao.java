@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.companyname.springapp.domain.Product;
 
-public class InMemoryProductDao implements ProductDao {
+public class InMemoryProductDao implements ProductRepositoryCustom {
 
     private List<Product> productList;
 
@@ -19,7 +19,7 @@ public class InMemoryProductDao implements ProductDao {
     public void saveProduct(Product prod) {
     }
 
-	public Product getProductByProductId(Integer productId) {
+	public Product getProductByProductId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
