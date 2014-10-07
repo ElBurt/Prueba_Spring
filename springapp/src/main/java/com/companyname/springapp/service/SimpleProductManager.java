@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.companyname.springapp.domain.Product;
-import com.companyname.springapp.repository.ProductRepository;
+import com.companyname.springapp.repository.ProductDao;
 
 @Component
 public class SimpleProductManager implements ProductManager {
@@ -14,27 +14,24 @@ public class SimpleProductManager implements ProductManager {
     private static final long serialVersionUID = 1L;
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductDao productDao;
 
-    public void setProductDao(ProductRepository productDao) {
-        this.productRepository = productDao;
+    public void setProductDao(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
     public List<Product> getProducts() {
-    	System.out.println("HA ENTRADO.........");
-    	List<Product> prod = productRepository.findByDescription("Lamp");
-    	System.out.println("sldkfjalsjfñasldfj: " + prod.get(1).getPrice());
-        return productRepository.getProductList();
+        return productDao.getProductList();
     }
 
     public void increasePrice(int percentage) {
-        List<Product> products = productRepository.getProductList();
+        List<Product> products = productDao.getProductList();
         if (products != null) {
             for (Product product : products) {
                 double newPrice = product.getPrice().doubleValue() * 
                                     (100 + percentage)/100;
                 product.setPrice(newPrice);
-                productRepository.saveProduct(product);
+                productDao.saveProduct(product);
             }
         }
     }
@@ -43,11 +40,11 @@ public class SimpleProductManager implements ProductManager {
 		Product product = new Product();
 		product.setDescription(data.getDescription());
 		product.setPrice(data.getPrice());
-		productRepository.saveProduct(product);
+		productDao.saveProduct(product);
 		
 	}
 	
 	 public Product getProductByProductId(Integer productId){
-	        return productRepository.getProductByProductId(productId);
+	        return productDao.getProductByProductId(productId);
 	    }
 }

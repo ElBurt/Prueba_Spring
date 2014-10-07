@@ -36,11 +36,6 @@ public class InventoryController {
 
     	String now = (new Date()).toString();
         logger.info("Returning hello view with " + now);
-        logger.error("error");
-        if(logger.isDebugEnabled()){
-        	System.out.println("SI");
-        }
-        logger.debug("debug");
 
         Map<String, Object> myModel = new HashMap<String, Object>();
         myModel.put("now", now);

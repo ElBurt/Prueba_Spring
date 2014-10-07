@@ -19,7 +19,7 @@ public class InventoryControllerTests {
     public void testHandleRequestView() throws Exception{		
         InventoryController controller = new InventoryController();
         SimpleProductManager spm = new SimpleProductManager();
-        //spm.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
+        spm.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
         controller.setProductManager(spm);
         //controller.setProductManager(new SimpleProductManager());
         ModelAndView modelAndView = controller.handleRequest(null, null);		

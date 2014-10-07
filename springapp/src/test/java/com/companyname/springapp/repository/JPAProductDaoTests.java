@@ -15,12 +15,12 @@ import com.companyname.springapp.domain.Product;
 public class JPAProductDaoTests {
 
     private ApplicationContext context;
-    private ProductRepositoryCustom productDao;
+    private ProductDao productDao;
 
     @Before
     public void setUp() throws Exception {
         context = new ClassPathXmlApplicationContext("classpath:test-context.xml");
-        productDao = (ProductRepositoryCustom) context.getBean("productDao");
+        productDao = (ProductDao) context.getBean("productDao");
     }
 
     @Test

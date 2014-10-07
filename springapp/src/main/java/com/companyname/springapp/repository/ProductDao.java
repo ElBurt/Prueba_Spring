@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.companyname.springapp.domain.Product;
 
-public interface ProductRepositoryCustom {
+public interface ProductDao {
 
     public List<Product> getProductList();
 

@@ -1,19 +1,16 @@
 package com.companyname.springapp.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.companyname.springapp.domain.Product;
 import com.companyname.springapp.repository.InMemoryProductDao;
-import com.companyname.springapp.repository.ProductRepository;
+import com.companyname.springapp.repository.ProductDao;
 
 public class SimpleProductManagerTests {
 
@@ -47,15 +44,15 @@ public class SimpleProductManagerTests {
         product.setPrice(TABLE_PRICE);
         products.add(product);
         
-        //ProductRepository productDao = new InMemoryProductDao(products);
-       // productManager.setProductDao(productDao);
+        ProductDao productDao = new InMemoryProductDao(products);
+        productManager.setProductDao(productDao);
         //productManager.setProducts(products);
     }
 
     @Test
     public void testGetProductsWithNoProducts() {
         productManager = new SimpleProductManager();
-       // productManager.setProductDao(new InMemoryProductDao(null));
+        productManager.setProductDao(new InMemoryProductDao(null));
         assertNull(productManager.getProducts());
     }
 
@@ -78,7 +75,7 @@ public class SimpleProductManagerTests {
     public void testIncreasePriceWithNullListOfProducts() {
         try {
             productManager = new SimpleProductManager();
-            //productManager.setProductDao(new InMemoryProductDao(null));
+            productManager.setProductDao(new InMemoryProductDao(null));
             productManager.increasePrice(POSITIVE_PRICE_INCREASE);
         }
         catch(NullPointerException ex) {
@@ -90,7 +87,7 @@ public class SimpleProductManagerTests {
     public void testIncreasePriceWithEmptyListOfProducts() {
         try {
             productManager = new SimpleProductManager();
-           // productManager.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
+            productManager.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
             //productManager.setProducts(new ArrayList<Product>());
             productManager.increasePrice(POSITIVE_PRICE_INCREASE);
         }
