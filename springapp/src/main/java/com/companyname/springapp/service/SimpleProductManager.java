@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import com.companyname.springapp.domain.Product;
 import com.companyname.springapp.repository.ProductRepository;
@@ -13,8 +14,14 @@ public class SimpleProductManager implements ProductManager {
 
     private static final long serialVersionUID = 1L;
 
-    @Autowired
     private ProductRepository productRepository;
+    
+    @Autowired
+    public SimpleProductManager(ProductRepository productRepository) {
+    	//TODO ARH este assert hay que ver como se valida, ya que es como los de junit pero hay varios imports a usar
+		Assert.notNull(productRepository, "productRepository must not be null!");
+		this.productRepository = productRepository;
+    }
 
     public void setProductDao(ProductRepository productDao) {
         this.productRepository = productDao;
@@ -22,8 +29,6 @@ public class SimpleProductManager implements ProductManager {
 
     public List<Product> getProducts() {
     	System.out.println("HA ENTRADO.........");
-    	List<Product> prod = productRepository.findByDescription("Lamp");
-    	System.out.println("sldkfjalsjfñasldfj: " + prod.get(1).getPrice());
         return productRepository.getProductList();
     }
 

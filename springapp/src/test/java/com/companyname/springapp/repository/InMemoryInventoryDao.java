@@ -2,26 +2,21 @@ package com.companyname.springapp.repository;
 
 import java.util.List;
 
+import com.companyname.springapp.domain.Inventory;
 import com.companyname.springapp.domain.Product;
 
-public class InMemoryProductDao implements ProductRepository {
+public class InMemoryInventoryDao implements InventoryRepository {
+	
+    private List<Inventory> inventoryList;
+    
+    
+    
+    public InMemoryInventoryDao(List<Inventory> inventoryList) {
+		this.inventoryList = inventoryList;
+	}
 
-    private List<Product> productList;
-
-    public InMemoryProductDao(List<Product> productList) {
-        this.productList = productList;
-    }
-
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void saveProduct(Product prod) {
-    }
-
-	public Product getProductByProductId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Inventory> getInventoryList() {
+		return this.inventoryList;
 	}
 
 	public long count() {
@@ -34,12 +29,12 @@ public class InMemoryProductDao implements ProductRepository {
 		
 	}
 
-	public void delete(Product arg0) {
+	public void delete(Inventory arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void delete(Iterable<? extends Product> arg0) {
+	public void delete(Iterable<? extends Inventory> arg0) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -54,42 +49,47 @@ public class InMemoryProductDao implements ProductRepository {
 		return false;
 	}
 
-	public Iterable<Product> findAll() {
+	public Iterable<Inventory> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Iterable<Product> findAll(Iterable<Integer> arg0) {
+	public Iterable<Inventory> findAll(Iterable<Integer> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Product findOne(Integer arg0) {
+	public Inventory findOne(Integer arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public <S extends Product> S save(S arg0) {
+	public <S extends Inventory> S save(S arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public <S extends Product> Iterable<S> save(Iterable<S> arg0) {
+	public <S extends Inventory> Iterable<S> save(Iterable<S> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Product> findByDescription(String Description) {
+	public void saveInventory(Inventory inventory) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<Inventory> findByIdInventory(Integer idInventory) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Product> findById(Integer id) {
+	public List<Inventory> findByProductRef(Product productRef) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Product> findByPrice(Double price) {
+	public List<Inventory> findByQuantity(Integer quantity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

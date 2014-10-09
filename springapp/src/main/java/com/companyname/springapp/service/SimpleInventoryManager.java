@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import com.companyname.springapp.domain.Inventory;
 import com.companyname.springapp.repository.InventoryRepository;
@@ -14,12 +15,20 @@ public class SimpleInventoryManager implements InventoryManager {
 
     private static final long serialVersionUID = 1L;
 
-    @Autowired
     private InventoryRepository inventoryRepository;
+    private ProductRepository productRepository;
     
     @Autowired
-    private ProductRepository productRepository;
-
+    public SimpleInventoryManager(InventoryRepository inventoryRepository, ProductRepository productRepository) {
+    	//TODO ARH este assert hay que ver como se valida, ya que es como los de junit pero hay varios imports a usar
+    	//Aparte parece un engorro para validar con junit con este constructor en vez de inyectar autowired en la declaracion
+    	//de las variables.
+		Assert.notNull(inventoryRepository, "inventoryRepository must not be null!");
+		Assert.notNull(productRepository, "productRepository must not be null!");
+		this.inventoryRepository = inventoryRepository;
+		this.productRepository = productRepository;
+    }
+    
     public void setInventoryDao(InventoryRepository inventoryDao) {
         this.inventoryRepository = inventoryDao;
     }

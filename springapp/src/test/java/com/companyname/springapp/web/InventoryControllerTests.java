@@ -9,8 +9,11 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.companyname.springapp.domain.Inventory;
 import com.companyname.springapp.domain.Product;
+import com.companyname.springapp.repository.InMemoryInventoryDao;
 import com.companyname.springapp.repository.InMemoryProductDao;
+import com.companyname.springapp.service.SimpleInventoryManager;
 import com.companyname.springapp.service.SimpleProductManager;
 
 public class InventoryControllerTests {
@@ -18,9 +21,12 @@ public class InventoryControllerTests {
     @Test
     public void testHandleRequestView() throws Exception{		
         InventoryController controller = new InventoryController();
-        SimpleProductManager spm = new SimpleProductManager();
-        //spm.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
+        InMemoryProductDao productDao = new InMemoryProductDao(new ArrayList<Product>());
+        InMemoryInventoryDao inventoryDao = new InMemoryInventoryDao(new ArrayList<Inventory>());
+        SimpleProductManager spm = new SimpleProductManager(productDao);
+        SimpleInventoryManager sim = new SimpleInventoryManager(inventoryDao, productDao);
         controller.setProductManager(spm);
+        controller.setInventoryManager(sim);
         //controller.setProductManager(new SimpleProductManager());
         ModelAndView modelAndView = controller.handleRequest(null, null);		
         assertEquals("hello", modelAndView.getViewName());

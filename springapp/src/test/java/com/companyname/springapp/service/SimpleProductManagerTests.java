@@ -33,7 +33,6 @@ public class SimpleProductManagerTests {
     
     @Before
     public void setUp() throws Exception {
-        productManager = new SimpleProductManager();
         products = new ArrayList<Product>();
         
         // stub up a list of products
@@ -47,15 +46,14 @@ public class SimpleProductManagerTests {
         product.setPrice(TABLE_PRICE);
         products.add(product);
         
-        //ProductRepository productDao = new InMemoryProductDao(products);
-       // productManager.setProductDao(productDao);
-        //productManager.setProducts(products);
+        ProductRepository productDao = new InMemoryProductDao(products);
+        productManager = new SimpleProductManager(productDao);
+        productManager.setProductDao(productDao);
     }
 
     @Test
     public void testGetProductsWithNoProducts() {
-        productManager = new SimpleProductManager();
-       // productManager.setProductDao(new InMemoryProductDao(null));
+        productManager = new SimpleProductManager(new InMemoryProductDao(null));
         assertNull(productManager.getProducts());
     }
 
@@ -77,8 +75,7 @@ public class SimpleProductManagerTests {
     @Test
     public void testIncreasePriceWithNullListOfProducts() {
         try {
-            productManager = new SimpleProductManager();
-            //productManager.setProductDao(new InMemoryProductDao(null));
+        	productManager = new SimpleProductManager(new InMemoryProductDao(null));
             productManager.increasePrice(POSITIVE_PRICE_INCREASE);
         }
         catch(NullPointerException ex) {
@@ -89,9 +86,7 @@ public class SimpleProductManagerTests {
     @Test
     public void testIncreasePriceWithEmptyListOfProducts() {
         try {
-            productManager = new SimpleProductManager();
-           // productManager.setProductDao(new InMemoryProductDao(new ArrayList<Product>()));
-            //productManager.setProducts(new ArrayList<Product>());
+        	productManager = new SimpleProductManager(new InMemoryProductDao(new ArrayList<Product>()));
             productManager.increasePrice(POSITIVE_PRICE_INCREASE);
         }
         catch(Exception ex) {
