@@ -1,5 +1,7 @@
 package com.companyname.springapp.web;
 
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -10,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.companyname.springapp.domain.Product;
 import com.companyname.springapp.service.CreateInventory;
 import com.companyname.springapp.service.InventoryManager;
 import com.companyname.springapp.service.ProductManager;
@@ -53,8 +57,6 @@ public class CreateInventoryFormController {
     public String onSubmit(@Valid CreateInventory createInventory, BindingResult result, Model model)
     {
         if (result.hasErrors()) {
-        	model.addAttribute("products", this.productManager.getProducts());
-            model.addAttribute("inventories", this.inventoryManager.getInventories());
             return "createinventory";
         }
         
@@ -70,11 +72,17 @@ public class CreateInventoryFormController {
     	CreateInventory createInventory = new CreateInventory();
         /*createInventory.setProductRef(new Product());
         createInventory.setQuantity(0);*/
-    	model.addAttribute("products", this.productManager.getProducts());
-        model.addAttribute("inventories", this.inventoryManager.getInventories());
         model.addAttribute("ahora1", "ahora2");
     	
         return createInventory;
+    }
+    
+    //Con esta funcion consigo insertar antes de cada llamada a la página
+    //(inicial o al recargar tras error) insertar la lista de productos
+    //en el objeto "products", que invocaré en la jsp
+    @ModelAttribute("products")
+    public List<Product> populateProducts(){
+    	return this.productManager.getProducts();
     }
 
     public void setProductManager(ProductManager productManager) {
