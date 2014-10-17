@@ -28,10 +28,10 @@
 	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
 	p:dataSource-ref="dataSource"
 	p:jpaVendorAdapter-ref="jpaAdapter">
-	<property name="loadTimeWeaver">
-            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
-	</property>                             
-	<property name="persistenceUnitName" value="springappPU"></property>
+		<property name="loadTimeWeaver">
+	    	<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
+	    </property>                             
+        <property name="persistenceUnitName" value="springappPU"></property>
     </bean>
 	 
     <bean id="jpaAdapter"

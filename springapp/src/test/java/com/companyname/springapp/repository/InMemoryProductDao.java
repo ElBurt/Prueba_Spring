@@ -94,4 +94,9 @@ public class InMemoryProductDao implements ProductRepository {
 		return null;
 	}
 
+	public Long getNumberProductsRepeated(String description) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

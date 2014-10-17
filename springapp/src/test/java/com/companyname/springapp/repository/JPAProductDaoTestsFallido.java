@@ -1,26 +1,28 @@
 package com.companyname.springapp.repository;
 
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.companyname.springapp.domain.Product;
 
 
-public class JPAProductDaoTests {
+public class JPAProductDaoTestsFallido {
 
     private ApplicationContext context;
-    private ProductRepositoryCustom productDao;
+    @Autowired
+    private ProductRepository productDao;
 
     @Before
     public void setUp() throws Exception {
         context = new ClassPathXmlApplicationContext("classpath:test-context.xml");
-        productDao = (ProductRepositoryCustom) context.getBean("productDao");
+        //productDao = (ProductRepositoryCustom) context.getBean("productDao");
     }
 
     @Test
