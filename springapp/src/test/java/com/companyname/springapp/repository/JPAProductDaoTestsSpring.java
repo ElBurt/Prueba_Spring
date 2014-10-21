@@ -21,7 +21,7 @@ import com.companyname.springapp.domain.Product;
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class})
 @Transactional
 @ContextConfiguration(locations = {"classpath:test-context.xml"})
-public class JPAProductDaoTestsBueno {
+public class JPAProductDaoTestsSpring {
 
     @Autowired
 	private ProductRepository productRepository;

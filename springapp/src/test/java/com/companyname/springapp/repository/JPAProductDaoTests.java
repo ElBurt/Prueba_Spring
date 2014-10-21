@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.companyname.springapp.domain.Product;
 
 
-public class JPAProductDaoTestsFallido {
+public class JPAProductDaoTests {
 
     private ApplicationContext context;
     @Autowired
@@ -21,14 +21,21 @@ public class JPAProductDaoTestsFallido {
 
     @Before
     public void setUp() throws Exception {
+    	System.out.println("Entrando");
         context = new ClassPathXmlApplicationContext("classpath:test-context.xml");
-        //productDao = (ProductRepositoryCustom) context.getBean("productDao");
+        productDao = (ProductRepository) context.getBean("productRepository");
+        String[] tmp = context.getBeanDefinitionNames();
+        int sizea = tmp.length;
+        System.out.println("Tamaño: " + sizea);
+        for (int i = 0; i < sizea; i++) {
+			System.out.println(tmp[i]);
+		}
     }
 
     @Test
     public void testGetProductList() {
         List<Product> products = productDao.getProductList();
-        assertEquals(products.size(), 3, 0);	   
+        assertEquals(products.size(), 15, 0);	   
     }
 
     @Test
